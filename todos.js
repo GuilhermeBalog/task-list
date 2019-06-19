@@ -12,7 +12,7 @@ function renderTodos(){
         var todoText = document.createTextNode(todo)
 
         var linkElement = document.createElement('a')
-        var linkText = document.createTextNode('Delete')
+        var linkText = document.createTextNode('X')
 
         linkElement.appendChild(linkText)
         linkElement.setAttribute('href', '#')
@@ -20,9 +20,11 @@ function renderTodos(){
         var pos = todos.indexOf(todo)
         linkElement.setAttribute('onclick', 'deleteTodo(' + pos + ')')
 
-        todoElement.appendChild(todoText)
         todoElement.appendChild(linkElement)
+        todoElement.appendChild(todoText)
         listElement.appendChild(todoElement)
+
+        inputElement.focus()
     }
 }
 
@@ -40,6 +42,11 @@ function addTodo(){
 
 buttonElement.onclick = addTodo;
 
+inputElement.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        addTodo()
+    }
+})
 function deleteTodo(pos){
     todos.splice(pos, 1)
     renderTodos()

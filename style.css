@@ -1,0 +1,69 @@
+body{
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app header{
+    padding: 20px;
+    background-color: #262626;
+    color: white;
+}
+
+#app header a{
+    text-decoration: none;
+    color: rgb(241, 224, 90);
+}
+
+#app ul{
+    list-style: none;
+    width: 50%;
+    margin: 20px auto;
+    padding: 0;
+}
+
+#app li{
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+#app li a{
+    display: inline-block;
+    padding: .2em;
+    margin: 5px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: red;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+#app .addTodoForm{
+    width: 50%;
+    margin: auto;
+    display: flex;
+}
+
+#app input{
+    margin: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+#app button{
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 750px){
+    #app ul{
+        width: 90%;
+    }
+    #app .addTodoForm{
+        width: 90%;
+    }
+}
