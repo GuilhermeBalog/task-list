@@ -47,10 +47,18 @@ function renderTasks() {
   }
 }
 
-function toggleModal() {
-  formModal.classList.toggle("active");
-  app.classList.toggle("blur");
+function openModal() {
+  formModal.classList.add("active");
+  app.classList.add("blur");
+
   inputElement.focus()
+}
+
+function closeModal() {
+  formModal.classList.remove("active");
+  app.classList.remove("blur");
+
+  inputElement.blur()
 }
 
 function deleteTodo(pos) {
@@ -59,8 +67,8 @@ function deleteTodo(pos) {
   saveToStorage()
 }
 
-newBtn.addEventListener("click", toggleModal);
-closeBtn.addEventListener("click", toggleModal);
+newBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
 formModal.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -73,5 +81,5 @@ formModal.addEventListener('submit', (e) => {
     saveToStorage()
   }
 
-  toggleModal()
+  closeModal()
 })
