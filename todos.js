@@ -1,58 +1,77 @@
-var listElement = document.querySelector('#app ul')
-var inputElement = document.querySelector('#app input')
-var buttonElement = document.querySelector('#app button')
+const app = document.querySelector("#app");
+const listElement = document.querySelector('#app ul')
+const noTasksElement = document.querySelector('.no-tasks')
+const inputElement = document.querySelector('form input')
+const formModal = document.querySelector('.add-task-form')
+const newBtn = document.querySelector(".new-btn");
+const closeBtn = document.querySelector(".close");
 
-var todos = JSON.parse(localStorage.getItem('todo_list')) || []
+const itemName = '@guilhermebalog/task-list'
+const tasks = JSON.parse(localStorage.getItem(itemName)) || []
 
-function renderTodos(){
-    listElement.innerHTML = ''
+renderTasks()
 
-    for(todo of todos){
-        var todoElement = document.createElement('li')
-        var todoText = document.createTextNode(todo)
-
-        var linkElement = document.createElement('a')
-        var linkText = document.createTextNode('X')
-
-        linkElement.appendChild(linkText)
-        linkElement.setAttribute('href', '#')
-
-        var pos = todos.indexOf(todo)
-        linkElement.setAttribute('onclick', 'deleteTodo(' + pos + ')')
-
-        todoElement.appendChild(linkElement)
-        todoElement.appendChild(todoText)
-        listElement.appendChild(todoElement)
-
-        inputElement.focus()
-    }
+function saveToStorage() {
+  localStorage.setItem(itemName, JSON.stringify(tasks))
 }
 
-renderTodos()
+function renderTasks() {
+  listElement.innerHTML = ''
+  if (tasks.length > 0) {
+    noTasksElement.classList.remove('active')
 
-function addTodo(){
-    var todoText = inputElement.value;
-    if(todoText != ''){
-        todos.push(todoText)
-        inputElement.value = ''
-        renderTodos()
-        saveToStorage()
-    }
+    tasks.forEach((task, index) => {
+      const taskElement = document.createElement('li')
+
+      const paragraph = document.createElement('p')
+      const taskText = document.createTextNode(task)
+
+      paragraph.appendChild(taskText)
+
+      const checkTaskElement = document.createElement('button')
+      const icon = document.createElement('i')
+      icon.classList.add('far', 'fa-circle')
+
+      checkTaskElement.appendChild(icon)
+
+      checkTaskElement.addEventListener('click', () => {
+        deleteTodo(index)
+      })
+
+      taskElement.append(checkTaskElement, paragraph)
+
+      listElement.appendChild(taskElement)
+    })
+  } else {
+    noTasksElement.classList.add('active')
+  }
 }
 
-buttonElement.onclick = addTodo;
+function toggleModal() {
+  formModal.classList.toggle("active");
+  app.classList.toggle("blur");
+  inputElement.focus()
+}
 
-inputElement.addEventListener("keypress", function(event){
-    if(event.key === "Enter"){
-        addTodo()
-    }
-})
-function deleteTodo(pos){
-    todos.splice(pos, 1)
-    renderTodos()
+function deleteTodo(pos) {
+  tasks.splice(pos, 1)
+  renderTasks()
+  saveToStorage()
+}
+
+newBtn.addEventListener("click", toggleModal);
+closeBtn.addEventListener("click", toggleModal);
+formModal.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const taskText = inputElement.value;
+
+  if (taskText != '') {
+    tasks.push(taskText)
+    inputElement.value = ''
+    renderTasks()
     saveToStorage()
-}
+  }
 
-function saveToStorage(){
-    localStorage.setItem('todo_list', JSON.stringify(todos))
-}
+  toggleModal()
+})

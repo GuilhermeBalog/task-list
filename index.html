@@ -1,25 +1,183 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Simple Todo List Aplication</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div id="app">
-            <header>
-                <h1>Simple Todo List Aplication</h1>
-                <p>Created by Guilherme Balog Gardino</p>
-            </header>            
-            <ul></ul>
-            <div class="addTodoForm">
-                <input type="text" placeholder="Type a TODO">
-                <button>Add</button>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="./img/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="./img/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="./img/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./img/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="./img/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="./img/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="./img/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="./img/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./img/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="./img/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="./img/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./img/manifest.json" />
+    <meta name="msapplication-TileColor" content="#00bcd4" />
+    <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#00bcd4" />
+    <title>Task List | Guilherme Balog</title>
+
+    <meta name="description" content="Aplicação de lista de tarefas online." />
+
+    <meta itemprop="name" content="Task List | Guilherme Balog" />
+    <meta
+      itemprop="description"
+      content="Aplicação de lista de tarefas online."
+    />
+    <meta
+      itemprop="image"
+      content="https://repository-images.githubusercontent.com/192801585/de3f8400-8504-11eb-8ed6-ad1cddf81ca9"
+    />
+
+    <meta property="og:title" content="Task List | Guilherme Balog" />
+    <meta
+      property="og:description"
+      content="Aplicação de lista de tarefas online."
+    />
+    <meta property="og:site_name" content="Guilherme Balog Gardino" />
+    <meta
+      property="og:url"
+      content="https://guilhermebalog.ga/imersao-gamedev"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://repository-images.githubusercontent.com/192801585/de3f8400-8504-11eb-8ed6-ad1cddf81ca9"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Task List | Guilherme Balog" />
+    <meta
+      name="twitter:description"
+      content="Aplicação de lista de tarefas online."
+    />
+    <meta
+      name="twitter:image"
+      content="https://repository-images.githubusercontent.com/192801585/de3f8400-8504-11eb-8ed6-ad1cddf81ca9"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Task List</h1>
+      </header>
+
+      <main>
+        <div class="no-tasks">
+          <strong>Sem tasks!</strong>
+          <img src="img/relaxing.svg" alt="relaxing" />
+          <p>Adicione uma task clicando no botão do canto!</p>
         </div>
-        
-        <script src="todos.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="gituser.js"></script>
-    </body>
+
+        <ul></ul>
+
+        <footer>
+          <p>
+            Feito com <span>&hearts;</span> por
+            <br />
+            <a href="https://guilhermebalog.ga">
+              <strong>Guilherme Balog Gardino</strong>
+            </a>
+          </p>
+
+          <button class="new-btn">+</button>
+        </footer>
+      </main>
+    </div>
+
+    <form class="add-task-form">
+      <button type="button" class="close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <fieldset>
+        <legend>Nova Task</legend>
+
+        <input type="text" placeholder="Título" />
+      </fieldset>
+
+      <button type="submit">Add</button>
+    </form>
+
+    <script src="todos.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="gituser.js"></script> -->
+  </body>
 </html>

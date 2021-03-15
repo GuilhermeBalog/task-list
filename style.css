@@ -1,68 +1,230 @@
-body{
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#app header{
-    padding: 20px;
-    background-color: #262626;
-    color: white;
+body {
+  height: 100%;
+  background-color: #f0f0f0;
+
+  --blue: #00bcd4;
+  --transparent-gray: #252a3140;
+  --max-width: 600px;
 }
 
-#app header a{
-    color: rgb(241, 224, 90);
+body,
+input,
+button {
+  font-family: "Rubik", sans-serif;
 }
 
-#app ul{
-    list-style: none;
-    width: 50%;
-    margin: 20px auto;
-    padding: 0;
+button {
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-#app li{
-    padding: 10px;
-    margin: 5px;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+button:hover {
+  filter: brightness(90%);
 }
 
-#app li a{
-    display: inline-block;
-    padding: .2em;
-    margin: 5px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: red;
-    text-decoration: none;
-    text-align: center;
-    color: white;
+.blur {
+  filter: blur(8px);
 }
 
-#app .addTodoForm{
-    width: 50%;
-    margin: auto;
-    display: flex;
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: 0.1s;
 }
 
-#app input{
-    margin: 5px;
-    padding: 10px;
-    width: 100%;
+#app header {
+  padding: 1rem 0;
+  background-color: var(--blue);
+  color: white;
 }
 
-#app button{
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
+#app header h1 {
+  width: 100%;
+  max-width: var(--max-width);
+  padding-left: 3.25rem;
+  margin: 0 auto;
+  font-size: 2.5rem;
 }
 
-@media only screen and (max-width: 750px){
-    #app ul{
-        width: 90%;
-    }
-    #app .addTodoForm{
-        width: 90%;
-    }
+#app main {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  background-color: #f6f6f6;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+#app ul {
+  list-style: none;
+  /* height: 500px; */
+  flex: 1;
+  overflow: auto;
+}
+
+#app li {
+  display: flex;
+  align-items: center;
+}
+
+#app li button {
+  display: block;
+  padding: 0 0.75rem;
+  background: none;
+  text-decoration: none;
+  text-align: center;
+  color: var(--transparent-gray);
+  border: none;
+  font-size: 1.75rem;
+}
+
+#app li p {
+  font-size: 1.2rem;
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  flex: 1;
+  border-bottom: 1px solid var(--transparent-gray);
+}
+
+.no-tasks {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  height: 100%;
+  display: none;
+}
+
+.no-tasks.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-tasks strong {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+.no-tasks img {
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 12em;
+}
+
+.no-tasks p {
+  padding: 0 1rem;
+}
+
+.add-task-form.active {
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.add-task-form {
+  left: 50%;
+  transform: translateX(-50%);
+  top: -200%;
+  width: 90%;
+  max-width: var(--max-width);
+  background-color: white;
+  position: absolute;
+  z-index: 5;
+  box-shadow: -0.5rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+
+.add-task-form button.close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #bbb;
+}
+
+.add-task-form fieldset {
+  border: none;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.add-task-form legend {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.add-task-form input {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--transparent-gray);
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+}
+
+.add-task-form [type="submit"] {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  background-color: var(--blue);
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.new-btn {
+  cursor: pointer;
+  color: white;
+  background-color: var(--blue);
+  border: none;
+  outline: none;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.75rem;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+}
+
+footer {
+  font-size: 0.75rem;
+  z-index: 1;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+footer p {
+  font-weight: 300;
+  color: #666;
+}
+
+footer p span {
+  color: red;
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer strong {
+  font-weight: 500;
 }
