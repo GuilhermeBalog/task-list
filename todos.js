@@ -24,18 +24,32 @@ function renderTasks() {
       const taskElement = document.createElement('li')
 
       const paragraph = document.createElement('p')
-      const taskText = document.createTextNode(task)
+      const taskText = document.createTextNode(task.title)
 
       paragraph.appendChild(taskText)
 
       const checkTaskElement = document.createElement('button')
       const icon = document.createElement('i')
-      icon.classList.add('far', 'fa-circle')
+
+      if(task.done){
+        taskElement.classList.add('done')
+        icon.classList.add('fas', 'fa-check-circle')
+      } else {
+        icon.classList.add('far', 'fa-circle')
+        icon.addEventListener('mouseover', () => {
+          icon.className = ''
+          icon.classList.add('fas', 'fa-check-circle')
+        })
+        icon.addEventListener('mouseleave', () => {
+          icon.className = ''
+          icon.classList.add('far', 'fa-circle')
+        })
+      }
 
       checkTaskElement.appendChild(icon)
 
       checkTaskElement.addEventListener('click', () => {
-        deleteTodo(index)
+        toggleTodo(index)
       })
 
       taskElement.append(checkTaskElement, paragraph)
@@ -61,6 +75,12 @@ function closeModal() {
   inputElement.blur()
 }
 
+function toggleTodo(pos) {
+  tasks[pos].done = !tasks[pos].done
+  renderTasks()
+  saveToStorage()
+}
+
 function deleteTodo(pos) {
   tasks.splice(pos, 1)
   renderTasks()
@@ -75,7 +95,10 @@ formModal.addEventListener('submit', (e) => {
   const taskText = inputElement.value;
 
   if (taskText != '') {
-    tasks.push(taskText)
+    tasks.push({
+      title: taskText,
+      done: false
+    })
     inputElement.value = ''
     renderTasks()
     saveToStorage()
